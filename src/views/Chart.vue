@@ -37,6 +37,27 @@ export default {
       dataSource: {},
       chartData: [],
       dataFromAPI: [],
+      //台灣 加權指數
+      Taiwan_TSE: [],
+      //台灣上櫃 櫃檯指數(TWO)
+      Taiwan_TWO: [],
+      //納斯達克
+      USA_NASDAQ: [],
+      //道瓊
+      USA_DJI: [],
+      //日經 225
+      Japan_N225: [],
+      //新加坡海峽時報
+      Singapore_STI: [],
+      //南韓-綜合
+      SouthKorea_KS11: [],
+      //倫敦-金融時報 英國FTSE100指數
+      England_FTSE: [],
+      //中國-上海綜合 上海A股指數
+      China_SH: [],
+      //香港恆生
+      HK_HSI: [],
+
     }
   },
   created() {
@@ -84,17 +105,6 @@ export default {
           data: this.chartData
         }
 
-        // const labelList = Object.keys(data)
-        // const chartData = Object.values(data)
-        // const chartName = Object.values(data)[0]
-
-        // this.apiLabelName = chartName
-
-        // this.apiLabels = labelList.splice(1, labelList.length)
-        // this.apiChartData = chartData.splice(1, chartData.length)
-
-        // this.fillData()
-
       } catch (error) {
 
         alert('取得資料失敗，請稍後再試，或通知站主。')
@@ -111,22 +121,41 @@ export default {
           case "月別":
             break
           case "台灣-加權":
-
+            this.Taiwan_TSE.push(element)
+            break
           case "台灣-上櫃":
-
+            this.Taiwan_TWO.push(element)
             break
           case "美國-那斯達克":
+            this.USA_NASDAQ.push(element)
+            break
           case "美國-道瓊工業":
+            this.USA_DJI.push(element)
+            break
           case "日本-日經225":
+            this.Japan_N225.push(element)
+            break
           case "新加坡-海峽時報":
+            this.Singapore_STI.push(element)
+            break
           case "南韓-綜合":
+            this.SouthKorea_KS11.push(element)
+            break
           case "倫敦-金融時報":
+            this.England_FTSE.push(element)
+            break
           case "中國-上海綜合":
+            this.China_SH.push(element)
+            break
           case "中國-香港恆生":
-
+            this.HK_HSI.push(element)
+            break
         }
       })
 
+      console.log('台灣上櫃', this.Taiwan_TWO)
+      console.log('加權指數', this.Taiwan_TSE)
+      console.log('中國-香港恆生', this.HK_HSI)
 
     },
     restructureData() {
