@@ -1,25 +1,29 @@
 module.exports = {
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/economic-charts-fusioncharts/'
+    : '/'
+  ,
   transpileDependencies: [
     'vuetify'
   ],
-  module: {
-    rules: [
-      {
-        test: /\.s(c|a)ss$/,
-        use: [
-          'vue-style-loader',
-          'css-loader',
-          {
-            // Requires >= sass-loader@^8.0.0
-            options: {
-              implementation: require('sass'),
-              sassOptions: {
-                indentedSyntax: true // optional
-              },
-            },
-          },
-        ],
-      },
-    ],
-  }
+  // module: {
+  //   rules: [
+  //     {
+  //       test: /\.s(c|a)ss$/,
+  //       use: [
+  //         'vue-style-loader',
+  //         'css-loader',
+  //         {
+  //           // Requires >= sass-loader@^8.0.0
+  //           options: {
+  //             implementation: require('sass'),
+  //             sassOptions: {
+  //               indentedSyntax: true // optional
+  //             },
+  //           },
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // }
 }
