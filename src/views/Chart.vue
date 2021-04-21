@@ -35,7 +35,8 @@ export default {
       "height": "350",
       "dataFormat": "json",
       dataSource: {},
-      chartData: []
+      chartData: [],
+      dataFromAPI: [],
     }
   },
   created() {
@@ -54,13 +55,7 @@ export default {
           const labelList = Object.keys(element)
           const chartData = Object.values(element)
 
-          console.log('labelList', labelList)
-          console.log('chartData', chartData)
-
           for (let i in labelList) {
-            console.log(i)
-
-            // let index = i
             let preData = {
               month: chartData[0],
               label: "",
@@ -72,8 +67,10 @@ export default {
           }
 
         })
+        this.dataFromAPI = newData
+        console.log('this.dataFromAPI', this.dataFromAPI)
 
-        console.log('newData', newData)
+        this.classify(this.dataFromAPI)
 
         this.dataSource = {
           chart: {
@@ -104,6 +101,32 @@ export default {
         console.log('error', error)
 
       }
+
+    },
+    classify(data) {
+      data.forEach(element => {
+        const keyword = element.label
+
+        switch (keyword) {
+          case "月別":
+            break
+          case "台灣-加權":
+
+          case "台灣-上櫃":
+
+            break
+          case "美國-那斯達克":
+          case "美國-道瓊工業":
+          case "日本-日經225":
+          case "新加坡-海峽時報":
+          case "南韓-綜合":
+          case "倫敦-金融時報":
+          case "中國-上海綜合":
+          case "中國-香港恆生":
+
+        }
+      })
+
 
     },
     restructureData() {
