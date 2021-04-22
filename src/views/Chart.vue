@@ -57,12 +57,12 @@ export default {
       China_SH: [],
       //香港恆生
       HK_HSI: [],
-
     }
   },
   created() {
     this.fetchData()
-    this.restructureData()
+    // this.restructureData()
+    // this.fillData()
   },
   methods: {
     async fetchData() {
@@ -78,32 +78,24 @@ export default {
 
           for (let i in labelList) {
             let preData = {
-              month: chartData[0],
-              label: "",
-              value: ""
+              stockName: labelList[i],
+              data: {
+                label: "",
+                value: ""
+              }
             }
-            preData.label = labelList[i]
-            preData.value = chartData[i]
+            preData.data.label = chartData[0]
+            preData.data.value = chartData[i]
             newData.push(preData)
           }
 
         })
         this.dataFromAPI = newData
-        console.log('this.dataFromAPI', this.dataFromAPI)
+        // console.log('this.dataFromAPI', this.dataFromAPI)
 
+        //歸類 API 資料
         this.classify(this.dataFromAPI)
 
-        this.dataSource = {
-          chart: {
-            caption: "每月國際主要股價指數",
-            subcaption: "最近 12 個月數據",
-            xaxisname: "月份",
-            yaxisname: "股價指數",
-            // numbersuffix: "K",
-            theme: "fusion"
-          },
-          data: this.chartData
-        }
 
       } catch (error) {
 
@@ -115,7 +107,7 @@ export default {
     },
     classify(data) {
       data.forEach(element => {
-        const keyword = element.label
+        const keyword = element.stockName
 
         switch (keyword) {
           case "月別":
@@ -154,48 +146,35 @@ export default {
       })
 
       console.log('台灣上櫃', this.Taiwan_TWO)
-      console.log('加權指數', this.Taiwan_TSE)
-      console.log('中國-香港恆生', this.HK_HSI)
-
-    },
-    restructureData() {
-      this.chartData = [
-        {
-          label: "陳",
-          value: "290"
-        },
-        {
-          label: "Saudi",
-          value: "260"
-        },
-        {
-          label: "Canada",
-          value: "180"
-        },
-        {
-          label: "Iran",
-          value: "140"
-        },
-        {
-          label: "Russia",
-          value: "115"
-        },
-        {
-          label: "UAE",
-          value: "100"
-        },
-        {
-          label: "US",
-          value: "30"
-        },
-        {
-          label: "China",
-          value: "30"
-        }
-      ];
+      // console.log('加權指數', this.Taiwan_TSE)
+      // console.log('中國-香港恆生', this.HK_HSI)
+      this.fillData()
     },
     fillData() {
 
+      const stockTitle = this.Taiwan_TWO[0].stockName
+      console.log('stockTitle', stockTitle)
+
+      let preChartData = []
+
+      this.Taiwan_TWO.forEach(element => {
+        preChartData.push(element.data)
+      })
+
+      this.chartData = preChartData
+
+      this.dataSource = {
+        chart: {
+          showValues: "1",
+          caption: `${stockTitle} 每月指數`,
+          subcaption: "最近 12 個月數據",
+          xaxisname: "月份",
+          yaxisname: "指數",
+          // numbersuffix: "K",
+          theme: "fusion"
+        },
+        data: this.chartData
+      }
     }
   }
 }
