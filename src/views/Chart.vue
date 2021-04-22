@@ -1,15 +1,30 @@
 //STEP 4: Render the chart
 <template>
-  <div id="chart">
-    <div id="chart-container">
-      <fusioncharts
-        :type="type"
-        :width="width"
-        :height="height"
-        :dataformat="dataFormat"
-        :dataSource="dataSource"
-      >
-      </fusioncharts>
+  <div>
+    <div id="btns-wrapper">
+      <v-row>
+        <v-btn
+          v-for="btn in btnList"
+          :key="btn.id"
+          :data-id="btn.id"
+          id="btn"
+          depressed
+        >
+          {{ btn.nameInMandarin }}
+        </v-btn>
+      </v-row>
+    </div>
+    <div id="chart">
+      <div id="chart-container">
+        <fusioncharts
+          :type="type"
+          :width="width"
+          :height="height"
+          :dataformat="dataFormat"
+          :dataSource="dataSource"
+        >
+        </fusioncharts>
+      </div>
     </div>
   </div>
 </template>
@@ -29,13 +44,16 @@ export default {
   name: 'chart',
   data() {
     return {
-      "type": "Line",
-      "renderAt": "chart-container",
-      "width": "1000",
-      "height": "350",
-      "dataFormat": "json",
+      type: "Line",
+      renderAt: "chart-container",
+      width: "90%",
+      height: "400",
+      dataFormat: "json",
       dataSource: {},
       chartData: [],
+      value: 1,
+      btnList: [],
+
       dataFromAPI: [],
       //台灣 加權指數
       Taiwan_TSE: [],
@@ -61,8 +79,6 @@ export default {
   },
   created() {
     this.fetchData()
-    // this.restructureData()
-    // this.fillData()
   },
   methods: {
     async fetchData() {
@@ -91,11 +107,10 @@ export default {
 
         })
         this.dataFromAPI = newData
-        // console.log('this.dataFromAPI', this.dataFromAPI)
+        console.log('this.dataFromAPI', this.dataFromAPI)
 
         //歸類 API 資料
         this.classify(this.dataFromAPI)
-
 
       } catch (error) {
 
@@ -144,16 +159,17 @@ export default {
             break
         }
       })
-
-      console.log('台灣上櫃', this.Taiwan_TWO)
+      // console.log('台灣上櫃', this.Taiwan_TWO)
       // console.log('加權指數', this.Taiwan_TSE)
       // console.log('中國-香港恆生', this.HK_HSI)
       this.fillData()
+      this.renderSwitchButtons()
+
     },
     fillData() {
 
       const stockTitle = this.Taiwan_TWO[0].stockName
-      console.log('stockTitle', stockTitle)
+      // console.log('stockTitle', stockTitle)
 
       let preChartData = []
 
@@ -175,9 +191,82 @@ export default {
         },
         data: this.chartData
       }
+    },
+    renderSwitchButtons() {
+      const stockNameData = [
+        {
+          id: 1,
+          nameInEngilsh: 'Taiwan_TSE',
+          nameInMandarin: this.Taiwan_TSE[0].stockName
+        },
+        {
+          id: 2,
+          nameInEngilsh: 'Taiwan_TWO',
+          nameInMandarin: this.Taiwan_TWO[0].stockName
+        },
+        {
+          id: 3,
+          nameInEngilsh: 'USA_NASDAQ',
+          nameInMandarin: this.USA_NASDAQ[0].stockName
+        },
+        {
+          id: 4,
+          nameInEngilsh: 'USA_DJI',
+          nameInMandarin: this.USA_DJI[0].stockName
+        },
+        {
+          nameInEngilsh: 'Japan_N225',
+          nameInMandarin: this.Japan_N225[0].stockName
+        },
+        {
+          id: 5,
+          nameInEngilsh: 'Singapore_STI',
+          nameInMandarin: this.Singapore_STI[0].stockName
+        },
+        {
+          id: 6,
+          nameInEngilsh: 'SouthKorea_KS11',
+          nameInMandarin: this.SouthKorea_KS11[0].stockName
+        },
+        {
+          id: 7,
+          nameInEngilsh: 'England_FTSE',
+          nameInMandarin: this.England_FTSE[0].stockName
+        },
+        {
+          id: 8,
+          nameInEngilsh: 'China_SH',
+          nameInMandarin: this.China_SH[0].stockName
+        },
+        {
+          id: 9,
+          nameInEngilsh: 'HK_HSI',
+          nameInMandarin: this.HK_HSI[0].stockName
+        },
+      ]
+
+      this.btnList = stockNameData
+      console.log('this.btnList', this.btnList)
     }
   }
 }
 
 </script>
 
+<style lang="scss" scoped>
+#btns-wrapper {
+  margin: 0 auto;
+  width: 80%;
+  padding: 30px;
+  display: flex;
+  margin-bottom: 10px;
+
+  #btn {
+    margin: 10px;
+  }
+}
+
+#chart-container {
+  text-align: center;
+}
+</style>
