@@ -14,7 +14,7 @@
           <router-link to="/">
             <v-list-item link>
               <v-list-item-content>
-                <v-list-item-title class="title">
+                <v-list-item-title class="title" id="author-name">
                   Shelly Chen
                 </v-list-item-title>
               </v-list-item-content>
@@ -25,7 +25,7 @@
         <v-divider></v-divider>
 
         <v-list nav dense>
-          <router-link to="/" class="link">
+          <router-link to="/stockPerYear" class="link">
             <v-list-item link>
               <v-list-item-icon>
                 <i class="fas fa-chart-line nav-icon"></i>
@@ -33,12 +33,20 @@
               <div class="title">年度國際主要股價指數</div>
             </v-list-item>
           </router-link>
-          <router-link to="/" class="link">
+          <router-link to="/stockPerMonth" class="link">
             <v-list-item link>
               <v-list-item-icon>
                 <i class="fas fa-chart-line nav-icon"></i>
               </v-list-item-icon>
               <div class="title">近月國際主要股價指數</div>
+            </v-list-item>
+          </router-link>
+          <router-link to="/" class="link">
+            <v-list-item link>
+              <v-list-item-icon>
+                <i class="far fa-laugh nav-icon"></i>
+              </v-list-item-icon>
+              <div class="title">專案介紹</div>
             </v-list-item>
           </router-link>
           <router-link to="*" class="link">
