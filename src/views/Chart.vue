@@ -7,6 +7,7 @@
           v-for="btn in btnList"
           :key="btn.id"
           :data-id="btn.id"
+          @click.prevent="switchChart(btn)"
           id="btn"
           depressed
         >
@@ -107,7 +108,6 @@ export default {
 
         })
         this.dataFromAPI = newData
-        console.log('this.dataFromAPI', this.dataFromAPI)
 
         //歸類 API 資料
         this.classify(this.dataFromAPI)
@@ -118,7 +118,6 @@ export default {
         console.log('error', error)
 
       }
-
     },
     classify(data) {
       data.forEach(element => {
@@ -181,8 +180,36 @@ export default {
 
       this.dataSource = {
         chart: {
+          formatNumberScale: "0",
           showValues: "1",
           caption: `${stockTitle} 每月指數`,
+          subcaption: "最近 12 個月數據",
+          xaxisname: "月份",
+          yaxisname: "指數",
+          // numbersuffix: "K",
+          theme: "fusion"
+        },
+        data: this.chartData
+      }
+    },
+    switchChart(target) {
+      console.log('target>>', target)
+
+      const title = target.nameInMandarin
+
+      let preChartData = []
+
+      target.data.forEach(element => {
+        preChartData.push(element.data)
+      })
+
+      this.chartData = preChartData
+
+      this.dataSource = {
+        chart: {
+          formatNumberScale: "0",
+          showValues: "1",
+          caption: `${title} 每月指數`,
           subcaption: "最近 12 個月數據",
           xaxisname: "月份",
           yaxisname: "指數",
@@ -197,51 +224,69 @@ export default {
         {
           id: 1,
           nameInEngilsh: 'Taiwan_TSE',
-          nameInMandarin: this.Taiwan_TSE[0].stockName
+          nameInMandarin: this.Taiwan_TSE[0].stockName,
+          data: this.Taiwan_TSE
         },
         {
           id: 2,
           nameInEngilsh: 'Taiwan_TWO',
-          nameInMandarin: this.Taiwan_TWO[0].stockName
+          nameInMandarin: this.Taiwan_TWO[0].stockName,
+          data: this.Taiwan_TWO
+
         },
         {
           id: 3,
           nameInEngilsh: 'USA_NASDAQ',
-          nameInMandarin: this.USA_NASDAQ[0].stockName
+          nameInMandarin: this.USA_NASDAQ[0].stockName,
+          data: this.USA_NASDAQ
         },
         {
           id: 4,
           nameInEngilsh: 'USA_DJI',
-          nameInMandarin: this.USA_DJI[0].stockName
+          nameInMandarin: this.USA_DJI[0].stockName,
+          data: this.USA_DJI
+
         },
         {
           nameInEngilsh: 'Japan_N225',
-          nameInMandarin: this.Japan_N225[0].stockName
+          nameInMandarin: this.Japan_N225[0].stockName,
+          data: this.Japan_N225
+
         },
         {
           id: 5,
           nameInEngilsh: 'Singapore_STI',
-          nameInMandarin: this.Singapore_STI[0].stockName
+          nameInMandarin: this.Singapore_STI[0].stockName,
+          data: this.Singapore_STI
+
         },
         {
           id: 6,
           nameInEngilsh: 'SouthKorea_KS11',
-          nameInMandarin: this.SouthKorea_KS11[0].stockName
+          nameInMandarin: this.SouthKorea_KS11[0].stockName,
+          data: this.SouthKorea_KS11
+
         },
         {
           id: 7,
           nameInEngilsh: 'England_FTSE',
-          nameInMandarin: this.England_FTSE[0].stockName
+          nameInMandarin: this.England_FTSE[0].stockName,
+          data: this.England_FTSE
+
         },
         {
           id: 8,
           nameInEngilsh: 'China_SH',
-          nameInMandarin: this.China_SH[0].stockName
+          nameInMandarin: this.China_SH[0].stockName,
+          data: this.China_SH
+
         },
         {
           id: 9,
           nameInEngilsh: 'HK_HSI',
-          nameInMandarin: this.HK_HSI[0].stockName
+          nameInMandarin: this.HK_HSI[0].stockName,
+          data: this.HK_HSI
+
         },
       ]
 
