@@ -90,7 +90,7 @@ export default {
 
         const response = await apiList.getAnnualMajorStockPriceIndex()
         const data = response.data.result.records
-
+        console.log('data', data)
         let newData = []
 
         data.forEach(element => {
@@ -130,7 +130,7 @@ export default {
         const keyword = element.stockName
 
         switch (keyword) {
-          case "月別":
+          case "年度":
             break
           case "台灣-加權":
             this.Taiwan_TSE.push(element)
@@ -215,9 +215,9 @@ export default {
         chart: {
           formatNumberScale: "0",
           showValues: "1",
-          caption: `${title} 每月指數`,
-          subcaption: "最近 12 個月數據",
-          xaxisname: "月份",
+          caption: `${title} 年度指數`,
+          subcaption: "西元 1998 年至今",
+          xaxisname: "年份",
           yaxisname: "指數",
           // numbersuffix: "K",
           theme: "fusion"
