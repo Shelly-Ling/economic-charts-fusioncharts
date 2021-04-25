@@ -15,7 +15,7 @@
         </v-btn>
       </v-row>
     </div>
-    <div id="chart">
+    <div id="chart" v-if="!isLoading">
       <div id="chart-container">
         <fusioncharts
           :type="type"
@@ -45,6 +45,8 @@ export default {
   name: 'chart',
   data() {
     return {
+      isLoading: true,
+
       type: "Line",
       renderAt: "chart-container",
       width: "90%",
@@ -84,6 +86,8 @@ export default {
   methods: {
     async fetchData() {
       try {
+        this.isLoading = true
+
         const response = await apiList.getAnnualMajorStockPriceIndex()
         const data = response.data.result.records
 
@@ -111,12 +115,14 @@ export default {
 
         //歸類 API 資料
         this.classify(this.dataFromAPI)
+        this.isLoading = false
+
 
       } catch (error) {
+        this.isLoading = false
 
         alert('取得資料失敗，請稍後再試，或通知站主。')
         console.log('error', error)
-
       }
     },
     classify(data) {

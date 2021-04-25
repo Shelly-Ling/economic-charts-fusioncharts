@@ -4,7 +4,6 @@ import Introduction from '../views/Introduction.vue'
 import StockDataPerYear from '../views/StockDataPerYear.vue'
 import StockDataPerＭonth from '../views/StockDataPerＭonth.vue'
 
-
 import NotFound from '../views/NotFound.vue'
 
 Vue.use(VueRouter)
@@ -24,6 +23,11 @@ const routes = [
     path: '/stockPerMonth',
     name: 'stock-data-per-month',
     component: StockDataPerＭonth
+  },
+  {
+    path: '/booksRecommend',
+    name: 'booksRecommend',
+    component: () => import('../views/BooksRecommend.vue')
   },
   {
     path: '*',

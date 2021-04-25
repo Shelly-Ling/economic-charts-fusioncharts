@@ -25,6 +25,14 @@
         <v-divider></v-divider>
 
         <v-list nav dense>
+          <router-link to="/" class="link">
+            <v-list-item link>
+              <v-list-item-icon>
+                <i class="far fa-laugh nav-icon"></i>
+              </v-list-item-icon>
+              <div class="title">專案介紹</div>
+            </v-list-item>
+          </router-link>
           <router-link to="/stockPerYear" class="link">
             <v-list-item link>
               <v-list-item-icon>
@@ -41,38 +49,31 @@
               <div class="title">近月國際主要股價指數</div>
             </v-list-item>
           </router-link>
-          <router-link to="/" class="link">
-            <v-list-item link>
-              <v-list-item-icon>
-                <i class="far fa-laugh nav-icon"></i>
-              </v-list-item-icon>
-              <div class="title">專案介紹</div>
-            </v-list-item>
-          </router-link>
-          <router-link to="*" class="link">
+
+          <!-- <router-link to="*" class="link">
             <v-list-item link>
               <v-list-item-icon>
                 <i class="far fa-laugh nav-icon"></i>
               </v-list-item-icon>
               <div class="title">站長背景</div>
             </v-list-item>
-          </router-link>
-          <router-link to="*" class="link">
+          </router-link> -->
+          <!-- <router-link to="/booksRecommend" class="link">
             <v-list-item link>
               <v-list-item-icon>
                 <i class="fas fa-book nav-icon"></i>
               </v-list-item-icon>
               <div class="title">推薦書單</div>
             </v-list-item>
-          </router-link>
-          <router-link to="*" class="link">
+          </router-link> -->
+          <!-- <router-link to="*" class="link">
             <v-list-item link>
               <v-list-item-icon>
                 <i class="fas fa-star nav-icon"></i>
               </v-list-item-icon>
               <div class="title">未來規劃</div>
             </v-list-item>
-          </router-link>
+          </router-link> -->
         </v-list>
       </v-navigation-drawer>
     </v-card>
