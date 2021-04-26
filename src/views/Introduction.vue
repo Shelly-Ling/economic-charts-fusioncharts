@@ -1,6 +1,6 @@
-<template id="wrapper">
-  <div id="content" class="main">
-    <div class="abc">
+<template>
+  <div id="intro-wrapper">
+    <div id="main">
       <h1>專案介紹</h1>
       <article>
         <p>
@@ -47,42 +47,47 @@
 </template>
 
 <style lang="scss" scoped>
-#content {
+#intro-wrapper {
   width: auto;
   height: 100vh;
-  padding: 10px 50px;
+  padding: 0px 50px;
   overflow: scroll;
 
-  h1 {
-    margin: 20px 0;
-  }
+  #main {
+    margin: 0 auto;
 
-  p {
-    max-width: 800px;
-  }
+    h1 {
+      margin: 30px 0;
+      text-align: center;
+    }
 
-  a {
-    display: block;
-  }
-  .code-area {
-    margin: 20px 0;
-    background-color: rgb(243, 243, 243);
-    border-radius: 30px;
-    max-width: 600px;
+    article {
+      max-width: 1200px;
+    }
 
-    .code {
-      background-color: Transparent;
+    a {
+      display: block;
+    }
+    .code-area {
+      margin: 20px 0;
+      background-color: rgb(243, 243, 243);
+      border-radius: 30px;
+      max-width: 600px;
+
+      .code {
+        background-color: Transparent;
+      }
     }
   }
 }
 
 @media (min-width: 980px) {
-  #content {
-    width: 90vw;
+  #intro-wrapper {
+    width: calc(100vw - 56px); //減掉 Navbar 寬
     height: 100vh;
-    padding: 50px 100px;
     display: flex;
     justify-content: center;
+    font-size: 20px;
   }
 }
 </style>

@@ -1,6 +1,7 @@
 //STEP 4: Render the chart
 <template>
-  <div>
+  <div v-if="!isLoading" id="wrapper">
+    <h1>國際主要股價指數（年度）</h1>
     <div id="btns-wrapper">
       <v-row>
         <v-btn
@@ -15,7 +16,7 @@
         </v-btn>
       </v-row>
     </div>
-    <div id="chart" v-if="!isLoading">
+    <div id="chart">
       <div id="chart-container">
         <fusioncharts
           :type="type"
@@ -305,19 +306,35 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#btns-wrapper {
-  margin: 0 auto;
-  width: 80%;
-  padding: 30px;
+#wrapper {
+  height: 100vh;
   display: flex;
-  margin-bottom: 10px;
+  flex-direction: column;
+  justify-content: center;
+  overflow: scroll;
 
-  #btn {
-    margin: 10px;
+  h1 {
+    margin: 30px 0;
+    text-align: center;
+  }
+
+  #btns-wrapper {
+    margin: 0 auto;
+    width: 80%;
+    padding: 30px;
+    display: flex;
+    margin-bottom: 10px;
+
+    #btn {
+      margin: 10px;
+    }
+  }
+
+  #chart-container {
+    text-align: center;
   }
 }
 
-#chart-container {
-  text-align: center;
+@media screen {
 }
 </style>
